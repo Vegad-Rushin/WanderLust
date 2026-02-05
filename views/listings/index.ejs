@@ -1,0 +1,184 @@
+
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  #filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .filter-options {
+    width: 75%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .filter {
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    opacity: 0.7;
+  }
+
+  .filter i {
+    font-size: 1.5rem;
+  }
+  .filter p {
+    font-size: 0.8rem;
+  }
+
+  .filter:hover {
+    opacity: 1;
+    scale: 1.1;
+    cursor: pointer;
+    color: #fe424d;
+  }
+
+  .tax-toggle {
+    border: 1px solid #fe424d;
+    border-radius: 1rem;
+    height: 3.2rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .tax-info {
+    display: none;
+  }
+
+  /* card price */
+  .card-text {
+    display: inline;
+  }
+
+</style>
+
+<body>
+
+  <div id="filters">
+
+    <div class="filter-options">
+      <div class="filter">
+        <div><i class="fa-solid fa-fire"></i></div>
+        <p>Trending</p>
+      </div>
+  
+      <div class="filter">
+        <div><i class="fa-solid fa-bed"></i></div>
+        <p>Room</p>
+      </div>
+  
+      <div class="filter">
+        <div><i class="fa-solid fa-mountain-city"></i></div>
+        <p>Iconic cities</p>
+      </div>
+  
+      <div class="filter">
+        <div><i class="fa-solid fa-mountain"></i></div>
+        <p>Mountains</p>
+      </div>
+  
+      <div class="filter">
+        <div><i class="fa-brands fa-fort-awesome"></i></div>
+        <p>Castles</p>
+      </div>
+  
+      <div class="filter">
+        <div><i class="fa-solid fa-person-swimming"></i></div>
+        <p>Amazing pools</p>
+      </div>
+  
+      <div class="filter">
+        <div><i class="fa-solid fa-campground"></i></div>
+        <p>Camping</p>
+      </div>
+  
+      <div class="filter">
+        <div><i class="fa-solid fa-cow"></i></div>
+        <p>Farms</p>
+      </div>
+  
+      <div class="filter">
+        <div><i class="fa-regular fa-snowflake"></i></div>
+        <p>Arctic</p>
+      </div>
+
+      <div class="filter">
+        <div><i class="fa-solid fa-leaf"></i></div>
+        <p>Nature</p>
+      </div>
+    </div>
+
+    <div class="tax-toggle">
+      <div class="form-check form-switch form-check-reverse">
+        <input class="form-check-input" type="checkbox" id="switchCheckReverse">
+        <label class="form-check-label" for="switchCheckReverse">Display total after taxes</label>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container-fluid mt-3 px-1">
+
+    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1">
+
+        <% for(listing of allListings) { %>
+          <a href="/listings/<%= listing._id %>" class="listing-link">
+            <div class="card col listing-card">
+                <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.title %> - image" style="height: 18rem;">
+                <div class="card-img-overlay"></div>
+                <div class="card-body">
+                  <h5 class="card-title"><b><%= listing.title %></b></h5>
+                  <p class="card-text">&#8377; <%= listing.price.toLocaleString("en-IN") %> </p> <span>/ night</span><i class="tax-info">&nbsp; &nbsp; + 18% GST</i> 
+                  <!-- <a href="/listings/" class="btn btn-primary">Book now</a> -->
+                </div>
+            </div>
+          </a>
+        <% } %>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    let taxSwitch = document.getElementById("switchCheckReverse");
+
+    taxSwitch.addEventListener("change", (e) => {
+
+      let taxInfo = document.getElementsByClassName("tax-info");
+      let prices = document.getElementsByClassName("card-text");
+
+
+      for(let price of prices) {
+
+        // Store base price ONCE
+        if (!price.dataset.basePrice) {
+          let base = parseInt(
+            price.innerText.replace(/[^\d]/g, "")
+          );
+          price.dataset.basePrice = base;
+        }
+
+        let numPrice = Number(price.dataset.basePrice);
+        let gst = Number((numPrice * 0.18));
+
+        if(taxSwitch.checked) {
+          let total = numPrice + gst;
+          price.innerText = `₹ ${Math.round(total).toLocaleString("en-IN")} ( ₹ ${numPrice.toLocaleString("en-IN")} + ₹ ${gst.toLocaleString("en-IN")} GST )`;
+        } else {
+          price.innerText = `₹ ${numPrice.toLocaleString("en-IN")}`;
+        }
+        
+      }
+      
+    })
+
+  </script>
+
+</body>
+
+
