@@ -95,8 +95,15 @@ app.use((req,res,next) => {
 //     res.send(registeredUser);
 // });
 
+
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
+
+// ROOT Route
+app.get("/", (req,res) => {
+    res.redirect("/listings");
+});
+
 app.use("/", userRouter);
 
 

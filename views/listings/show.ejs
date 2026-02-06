@@ -1,5 +1,208 @@
 
 <% layout("/layouts/boilerplate") %>
+
+<style>
+    /* ================================
+   SHOW PAGE LAYOUT FIXES
+================================ */
+
+/* Make rows behave properly */
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* ================================
+   TITLE
+================================ */
+h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* ================================
+   LISTING CARD
+================================ */
+.listing-card {
+  margin: auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* Listing image */
+.show-image {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+}
+
+/* Card body spacing */
+.listing-card .card-body {
+  padding: 1.25rem;
+}
+
+.listing-card .card-text {
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+}
+
+/* ================================
+   EDIT / DELETE BUTTONS
+================================ */
+.btns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btns form {
+  margin: 0;
+}
+
+/* ================================
+   REVIEWS SECTION
+================================ */
+.starability-grow {
+  margin-bottom: 1rem;
+}
+
+.row .card.col-5 {
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+/* ================================
+   MAP
+================================ */
+#map {
+  width: 100%;
+  height: 320px;
+  border-radius: 16px;
+  margin-top: 1rem;
+}
+
+/* ================================
+   MOBILE FIXES
+================================ */
+@media (max-width: 768px) {
+
+  /* Remove Bootstrap offsets on mobile */
+  .offset-3,
+  .offset-4 {
+    margin-left: 0 !important;
+  }
+
+  /* Full width columns */
+  .col-6,
+  .col-8 {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Listing card full width */
+  .listing-card {
+    width: 100%;
+  }
+
+  /* Image becomes landscape */
+  .show-image {
+    height: 240px;
+  }
+
+  /* Buttons stack */
+  .btns {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btns .btn {
+    width: 80%;
+  }
+
+  /* Reviews full width */
+  .row .card.col-5 {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+
+  /* Text spacing */
+  .listing-card .card-text {
+    font-size: 0.9rem;
+  }
+}
+
+/* ================================
+   EDIT / DELETE BUTTON FIX
+================================ */
+
+/* Button container */
+.btns {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Make both buttons equal */
+.btns .btn {
+  min-width: 120px;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+/* Edit button (primary action) */
+.btns .subBtn {
+  background-color: #fe424d;
+  border: none;
+  color: #fff;
+}
+
+.btns .subBtn:hover {
+  background-color: #e63946;
+  transform: translateY(-1px);
+}
+
+/* Delete button (danger but secondary) */
+.btns form button {
+  background-color: #212529;
+  border: none;
+  color: #fff;
+}
+
+.btns form button:hover {
+  background-color: #000;
+  transform: translateY(-1px);
+}
+
+/* Click feedback */
+.btns .btn:active {
+  transform: scale(0.96);
+}
+
+/* ================================
+   MOBILE BEHAVIOR
+================================ */
+@media (max-width: 768px) {
+
+  .btns {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btns .btn {
+    width: 85%;
+  }
+}
+
+
+
+</style>
+
 <script>
     const mapToken = "<%= process.env.MAP_TOKEN %>";
     const listing = <%- JSON.stringify(listing) %>;
