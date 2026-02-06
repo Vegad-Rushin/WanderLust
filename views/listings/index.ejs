@@ -2,63 +2,130 @@
 <% layout("/layouts/boilerplate") %>
 
 <style>
-  #filters {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-  }
+  #belowNav-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 🔥 key */
+  width: 100%;
+  padding: 1rem 1.5rem 0 1rem; /* optional spacing from edges */
+}
 
+/* LEFT SIDE FILTERS */
+.filter-options {
+  border: 1px solid #fe424d;
+  border-radius: 1rem;
+  padding: 1rem 0.5rem 0 0.5rem;
+  display: flex;
+  gap: 2rem;
+  width: 55%;              /* 👈 exactly 50% */
+  overflow-x: auto;
+  scrollbar-width: none;
+  white-space: nowrap;
+}
+
+/* individual filter */
+.filter {
+  text-align: center;
+  opacity: 0.7;
+  flex-shrink: 0;          /* prevents shrinking */
+}
+
+.filter i {
+  font-size: 1.5rem;
+}
+
+.filter p {
+  font-size: 0.8rem;
+}
+
+.filter:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  cursor: pointer;
+  color: #fe424d;
+}
+
+/* RIGHT SIDE TOGGLE */
+.tax-toggle {
+  width: 20%;              /* 👈 exactly 20% */
+  min-width: max-content;  /* prevents squeezing */
+  border: 1px solid #fe424d;
+  border-radius: 1rem;
+  height: 3.2rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card price */
+
+.card-text {
+  display: inline;
+}
+
+
+/* @media (max-width: 992px) {
   .filter-options {
-    width: 75%;
-    display: flex;
-    justify-content: space-evenly;
-  }
-
-  .filter {
-    text-align: center;
-    margin-right: 2rem;
-    margin-top: 2rem;
-    opacity: 0.7;
-  }
-
-  .filter i {
-    font-size: 1.5rem;
-  }
-  .filter p {
-    font-size: 0.8rem;
-  }
-
-  .filter:hover {
-    opacity: 1;
-    scale: 1.1;
-    cursor: pointer;
-    color: #fe424d;
+    width: 65%;
   }
 
   .tax-toggle {
-    border: 1px solid #fe424d;
-    border-radius: 1rem;
-    height: 3.2rem;
-    padding: 1rem;
-    display: flex;
-    align-items: center;
+    width: auto;
   }
+} */
 
-  .tax-info {
-    display: none;
-  }
+@media (max-width: 768px) {
 
-  /* card price */
-  .card-text {
-    display: inline;
-  }
+#belowNav-options {
+  flex-wrap: wrap;              /* 🔥 allow wrapping */
+  gap: 1rem;
+}
+
+.filter i {
+  font-size: 1.6rem;
+}
+
+.filter p {
+  font-size: 0.9rem;
+}
+
+.filter-options {
+  border: 1px solid #fe424d;
+  border-radius: 1rem;
+  padding: 0.8rem 0.8rem 0 1.2rem ;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;            /* 👈 exactly 50% */
+  gap: 3rem;
+  width: 100%;                  /* 🔥 take full width */
+  overflow-x: auto;
+  scrollbar-width: none;
+  white-space: nowrap;
+}
+
+.tax-toggle {
+  display: flex;
+                    /* 🔥 move to next line */
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  /* padding: 0.75rem 1rem; */
+}
+
+.form-check {
+  width: 100%;
+  justify-content: space-between;
+}
+}
+
+
 
 </style>
 
 <body>
 
-  <div id="filters">
+  <div id="belowNav-options">
 
     <div class="filter-options">
       <div class="filter">
@@ -112,6 +179,7 @@
       </div>
     </div>
 
+
     <div class="tax-toggle">
       <div class="form-check form-switch form-check-reverse">
         <input class="form-check-input" type="checkbox" id="switchCheckReverse">
@@ -132,7 +200,7 @@
                 <div class="card-img-overlay"></div>
                 <div class="card-body">
                   <h5 class="card-title"><b><%= listing.title %></b></h5>
-                  <p class="card-text">&#8377; <%= listing.price.toLocaleString("en-IN") %> </p> <span>/ night</span><i class="tax-info">&nbsp; &nbsp; + 18% GST</i> 
+                  <p class="card-text">&#8377; <%= listing.price.toLocaleString("en-IN") %> </p> <span>/ night</span>
                   <!-- <a href="/listings/" class="btn btn-primary">Book now</a> -->
                 </div>
             </div>

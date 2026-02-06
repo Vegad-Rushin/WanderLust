@@ -1,37 +1,172 @@
 
 <style>
-  .search-btn {
-    background-color: #fe424d;
-    color: #fff;
-    border-radius: 25px;
-    padding: 0 1rem 0 1rem;
+ /* ================================
+   NAVBAR BASE STYLES
+================================ */
+.navbar,
+.navbar-collapse {
+  background-color: #ffffff !important;
+}
+
+.navbar {
+  padding: 0.6rem 1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  z-index: 1030;
+}
+
+.navbar .container-fluid {
+  align-items: center;
+}
+
+/* ================================
+   BRAND
+================================ */
+.navbar-brand {
+  font-size: 1.6rem;
+  color: #fe424d;
+}
+
+.navbar-brand:hover {
+  color: #fe424d;
+}
+
+/* ================================
+   NAV LINKS
+================================ */
+.nav-link {
+  font-size: 0.95rem;
+  color: #222;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #fe424d;
+  transform: translateX(2px);
+}
+
+.user {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* ================================
+   SEARCH BAR
+================================ */
+.nav-search {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.search-inp {
+  border-radius: 25px;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid #ddd;
+  transition: box-shadow 0.2s ease;
+}
+
+.search-inp:focus {
+  box-shadow: 0 0 0 2px rgba(254, 66, 77, 0.25);
+  border-color: #fe424d;
+}
+
+.search-btn {
+  background-color: #fe424d;
+  color: #fff;
+  border-radius: 25px;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  transition: all 0.25s ease;
+}
+
+.search-btn:hover {
+  background-color: #fff;
+  color: #fe424d;
+  border: 1px solid #fe424d;
+}
+
+.search-btn:active {
+  transform: scale(0.95);
+}
+
+/* ================================
+   COLLAPSE ANIMATION
+================================ */
+.navbar-collapse {
+  transition: all 0.35s ease;
+}
+
+/* ================================
+   DESKTOP LAYOUT
+================================ */
+@media (min-width: 769px) {
+  .nav-search {
+    max-width: 420px;
+  }
+}
+
+/* ================================
+   MOBILE STYLES
+================================ */
+@media (max-width: 768px) {
+
+  .navbar {
+    padding: 0.5rem 0.75rem;
   }
 
-  .search-btn:hover {
-    border: 1px solid #fe424d;
-    color: #fe424d;
-    font-weight: 800;
+  .navbar-collapse {
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    border-radius: 14px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
   }
 
-  .search-btn i {
-    display: inline;
-    margin-right: 0.5rem;
+  .navbar-nav {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .navbar-nav + .navbar-nav {
+    margin-top: 0.75rem;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 0.4rem 0;
+    font-size: 1rem;
+  }
+
+  .nav-search {
+    margin-top: 0.5rem;
   }
 
   .search-inp {
-    border-radius: 25px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
+    width: 100%;
+    padding: 0.5rem 1rem;
   }
 
-  .nav-link:hover {
-    text-decoration: underline;
+  .search-btn {
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
   }
 
   .user {
-    /* color: #fe424d; */
-    font-weight: 900; 
-    text-decoration: underline;
+    margin-top: 0.5rem;
+    color: #fe424d;
   }
+}
+
+/* ================================
+   HAMBURGER ICON ANIMATION
+================================ */
+.navbar-toggler {
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.navbar-toggler:not(.collapsed) {
+  transform: rotate(90deg);
+}
+
 
 </style>
 
@@ -46,8 +181,8 @@
           <a class="nav-link" href="/listings">Explore</a>
         </div>
 
-        <div class="navbar-nav ms-auto">
-          <form class="d-flex" role="search">
+        <div class="navbar-nav ms-md-auto my-2 my-md-0">
+          <form class="d-flex w-100 nav-search" role="search">
             <input class="form-control me-2 search-inp" type="search" placeholder="Search destinations" />
             <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
           </form>
