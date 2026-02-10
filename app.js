@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
+}
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -23,6 +27,11 @@ const { default: passportLocalMongoose } = require("passport-local-mongoose");
 
 // const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 const dbUrl = process.env.ATLASDB_URL;
+
+
+app.listen(8080, () => {
+    console.log("Server is listening on port 8080");
+});
 
 main().then(() => {
     console.log("Connected Successfully to DB!");
@@ -118,9 +127,4 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render("listings/error.ejs", {message});
     // res.status(statusCode).send(message);
 })
- 
-
-app.listen(8080, () => {
-    console.log("Server is listening on port 8080");
-});
 
