@@ -1,0 +1,45 @@
+<div class="auth-overlay" id="authModal">
+  <div class="auth-box">
+    <button class="auth-close" id="closeModal">&times;</button>
+
+    <!-- LOGIN FORM -->
+    <div id="loginForm">
+      <h3 class="mb-3 text-center">Log in to WanderLust</h3>
+
+      <form action="/login" method="POST" class="needs-validation" novalidate>
+
+        <input type="text" name="username" id="username" placeholder="Username" class="form-control" required>
+        <input type="password" name="password" id="password" placeholder="Password" class="form-control" required>
+        <button class="auth-btn">Log in</button>
+        
+      </form>
+
+      <p class="text-center mt-3">
+        Don’t have an account?
+        <span class="switch-link" id="switchToSignup">Sign up</span>
+      </p>
+    </div>
+
+    <!-- SIGNUP FORM -->
+    <div id="signupForm" style="display: none;">
+      <h3 class="mb-3 text-center">Sign up for WanderLust</h3>
+
+      <form action="/signup" method="POST" class="needs-validation" novalidate>
+
+        <input type="text" name="username" id="username" placeholder="Username" class="form-control" required>
+
+        <input type="email" name="email" id="email" placeholder="Email" class="form-control" required>
+
+        <input type="password" name="password" id="password" placeholder="Password" class="form-control" required>
+        
+        <button class="auth-btn">Sign up</button>
+      </form>
+
+      <p class="text-center mt-3">
+        Already have an account?
+        <span class="switch-link" id="switchToLogin">Log in</span>
+      </p>
+    </div>
+
+  </div>
+</div>

@@ -1,257 +1,221 @@
-
 <% layout("/layouts/boilerplate") %>
 
 <style>
-    /* ================================
-   SHOW PAGE LAYOUT FIXES
-================================ */
 
-/* Make rows behave properly */
-.row {
-  margin-left: 0;
-  margin-right: 0;
+/* ================= MAIN LAYOUT ================= */
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
 }
 
-/* ================================
-   TITLE
-================================ */
-h3 {
-  text-align: center;
+.content-wrapper {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* ================= SHOW PAGE FLEX ================= */
+
+.show-layout {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+
+/* LEFT SIDE */
+.left-section {
+  flex: 2;
+}
+
+/* RIGHT SIDE */
+.right-section {
+  flex: 1;
+  position: sticky;
+  top: 100px;
+}
+
+/* ================= TITLE ================= */
+
+.card-title {
+  font-weight: 900;
+  margin-left: 1rem;
   margin-bottom: 1rem;
 }
 
-/* ================================
-   LISTING CARD
-================================ */
+/* ================= LISTING CARD ================= */
+
 .listing-card {
-  margin: auto;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  border-radius: 18px;
+  padding: 1rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* Listing image */
 .show-image {
   width: 100%;
   height: 420px;
   object-fit: cover;
-  border-radius: 16px 16px 0 0;
-}
-
-/* Card body spacing */
-.listing-card .card-body {
-  padding: 1.25rem;
-}
-
-.listing-card .card-text {
-  font-size: 0.95rem;
-  margin-bottom: 0.6rem;
-}
-
-/* ================================
-   EDIT / DELETE BUTTONS
-================================ */
-.btns {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-}
-
-.btns form {
-  margin: 0;
-}
-
-/* ================================
-   REVIEWS SECTION
-================================ */
-.starability-grow {
+  border-radius: 16px;
   margin-bottom: 1rem;
 }
 
-.row .card.col-5 {
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+.card-body p {
+  margin-bottom: 0.7rem;
 }
 
-/* ================================
-   MAP
-================================ */
+.price-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* ================= BOOKING CARD ================= */
+
+.booking-card {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+.booking-card h5 {
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+
+.booking-card span {
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.reserve-btn {
+  width: 100%;
+  background-color: #fe424d;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.reserve-btn:hover {
+  background-color: #e63946;
+}
+
+/* ================= BUTTONS ================= */
+
+.btns {
+  /* display: flex; */
+  /* align-items: center; */
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.subBtn {
+  background-color: #fe424d;
+  color: #fff;
+  border: none;
+}
+
+.subBtn:hover {
+  background-color: #e63946;
+}
+
+.btn {
+  width: 10rem;
+}
+
+/* ================= REVIEW CARD ================= */
+
+.review-card {
+  border-radius: 14px;
+  padding: 0.8rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* ================= MAP ================= */
+
 #map {
   width: 100%;
-  height: 320px;
+  height: 380px;
   border-radius: 16px;
   margin-top: 1rem;
 }
 
-/* ================================
-   MOBILE FIXES
-================================ */
-@media (max-width: 768px) {
+/* ================= MOBILE ================= */
 
-  /* Remove Bootstrap offsets on mobile */
-  .offset-3,
-  .offset-4 {
-    margin-left: 0 !important;
+@media (max-width: 992px) {
+
+  .show-layout {
+    flex-direction: column;
   }
 
-  /* Full width columns */
-  .col-6,
-  .col-8 {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  /* Listing card full width */
-  .listing-card {
+  .right-section {
+    position: static;
     width: 100%;
   }
 
-  /* Image becomes landscape */
   .show-image {
-    height: 240px;
+    height: 260px;
   }
 
-  /* Buttons stack */
-  .btns {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .btns .btn {
-    width: 80%;
-  }
-
-  /* Reviews full width */
-  .row .card.col-5 {
-    width: 100%;
-    margin-left: 0 !important;
-  }
-
-  /* Text spacing */
-  .listing-card .card-text {
-    font-size: 0.9rem;
-  }
 }
-
-/* ================================
-   EDIT / DELETE BUTTON FIX
-================================ */
-
-/* Button container */
-.btns {
-  display: flex;
-  gap: 0.75rem;
-  justify-content: center;
-  margin-top: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-/* Make both buttons equal */
-.btns .btn {
-  min-width: 120px;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
-}
-
-/* Edit button (primary action) */
-.btns .subBtn {
-  background-color: #fe424d;
-  border: none;
-  color: #fff;
-}
-
-.btns .subBtn:hover {
-  background-color: #e63946;
-  transform: translateY(-1px);
-}
-
-/* Delete button (danger but secondary) */
-.btns form button {
-  background-color: #212529;
-  border: none;
-  color: #fff;
-}
-
-.btns form button:hover {
-  background-color: #000;
-  transform: translateY(-1px);
-}
-
-/* Click feedback */
-.btns .btn:active {
-  transform: scale(0.96);
-}
-
-/* ================================
-   MOBILE BEHAVIOR
-================================ */
-@media (max-width: 768px) {
-
-  .btns {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .btns .btn {
-    width: 85%;
-  }
-}
-
-
 
 </style>
 
+
 <script>
-    const mapToken = "<%= process.env.MAP_TOKEN %>";
-    const listing = <%- JSON.stringify(listing) %>;
+  const mapToken = "<%= process.env.MAP_TOKEN %>";
+  const listing = <%- JSON.stringify(listing) %>;
 </script>
 
-<div class="row mt-2">
 
-    <div class="col-8 offset-3 ">
-        <h3><%=listing.title%></h3>
-    </div>
+<div class="main-container">
+  <div class="content-wrapper">
 
-    <div class="card col-6 offset-3 listing-card">
-        <img src="<%=listing.image.url%>" class="card-img-top show-image" alt="<%=listing.title%> - image">
-        <div class="card-body">
-            <p class="card-text"><b> Owned by : <i><%=listing.owner.username%></i> </b></p>
-            <p class="card-text"><%= listing.description %> </p>
-            <p class="card-text">&#8377; <%= listing.price.toLocaleString("en-IN") %> </p>
-            <p class="card-text"><%= listing.location %>, <%= listing.country %> </p>
+    <div class="show-layout">
+
+      <!-- LEFT SECTION -->
+      <div class="left-section">
+
+        <h3 class="card-title"><%= listing.title %></h3>
+
+        <div class="card listing-card">
+          <img src="<%= listing.image.url %>" class="show-image" alt="listing image">
+
+          <div class="card-body">
+            <p><b>Owned by:</b> <i><%= listing.owner ? listing.owner.username : "Unknown" %></i></p>
+            <p><%= listing.description %></p>
+            <p class="price-text">₹ <%= listing.price.toLocaleString("en-IN") %> / night</p>
+            <p><%= listing.location %>, <%= listing.country %></p>
+          </div>
         </div>
-    </div>
 
-    <br>
+        <% if(currUser && listing.owner && currUser._id.equals(listing.owner._id)) { %>
+          <div class="btns">
+            <a href="/listings/<%= listing._id %>/edit" class="btn subBtn">Edit</a>
 
-    <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
+            <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+              <button class="btn btn-dark">Delete</button>
+            </form>
+          </div>
+        <% } %>
 
-    <div class="btns mb-3">
-
-        <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark subBtn col-1 offset-3">Edit</a>
-    
-        <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
-            <button class="btn btn-dark offset-4">Delete</button>
-        </form>
-
-    </div>
-
-    <% } %>
-
-
-    <div class="col-8 offset-3 mb-3">
         <hr>
 
+        <!-- REVIEW FORM -->
         <% if(currUser) { %>
+          <h4>Leave a Review</h4>
+          <form action="/listings/<%= listing.id %>/reviews" method="POST" novalidate class="needs-validation">
 
-        <h4>Leave a Review</h4>
-        <form action="/listings/<%= listing.id %>/reviews" method="POST" novalidate class="needs-validation">
-
-            <div class="mb-3 mt-3">
-            <label for="rating" class="form-label">Rating</label>
-            <fieldset class="starability-grow">
+            <div class="mb-3">
+              <label for="rating" class="form-label">Rating</label>
+              <fieldset class="starability-grow">
                 <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
                 <input type="radio" id="first-rate1" name="review[rating]" value="1" />
                 <label for="first-rate1" title="Terrible">1 star</label>
@@ -264,62 +228,86 @@ h3 {
                 <input type="radio" id="first-rate5" name="review[rating]" value="5" />
                 <label for="first-rate5" title="Amazing">5 stars</label>
               </fieldset>
-
-            <div class="mb-3 mt-3">
-                <label for="comment" class="form-label">Comments</label>
-                <textarea name="review[comment]" class="form-control" id="comment" cols="30" rows="5" required></textarea> 
-                <div class="invalid-feedback">Please add some comments for review</div>
             </div>
+
+            <div class="mb-3">
+              <label class="form-label">Comments</label>
+              <textarea name="review[comment]" class="form-control" rows="4" required></textarea>
+            </div>
+
             <button class="btn btn-outline-dark">Submit</button>
-        </form>
-        
+          </form>
         <% } %>
-        
-        <% if(listing.reviews.length > 0) { %>
-        <hr>
-        <div class="row">
-            <p><b>All Reviews</b></p>
+
+        <% if(listing.reviews.length) { %>
+          <hr>
+          <h5>All Reviews</h5>
+
+          <div class="row">
             <% for(review of listing.reviews) { %>
-                <div class="card col-5 ms-3 mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">@<%=review.author.username%></h5>
-                        <p class="starability-result card-text" data-rating="<%=review.rating%>"></p>
-                        <p class="card-text"><%=review.comment%></p>
+              <div class="col-md-6 mb-3">
+                <div class="card review-card">
+                  <div class="card-body">
+                    <h6>@<%= review.author.username %></h6>
+                    <p class="starability-result" data-rating="<%= review.rating %>"></p>
+                    <p><%= review.comment %></p>
 
-                        <% if(currUser && currUser._id.equals(review.author._id)) { %>
-
-                        <form action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST" class="mb-2">
-                            <button class="btn btn-sm btn-dark">Delete</button>
-                        </form>
-
-                        <% } %>
-
-                    </div>
+                    <% if(currUser && currUser._id.equals(review.author._id)) { %>
+                      <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                        <button class="btn btn-sm btn-dark">Delete</button>
+                      </form>
+                    <% } %>
+                  </div>
                 </div>
+              </div>
             <% } %>
-        </div>
-
+          </div>
         <% } %>
+
+        <hr>
+        <h4>Where you'll be</h4>
+        <div id="map"></div>
+
+      </div>
+
+
+      <!-- RIGHT SECTION (BOOKING CARD) -->
+      <div class="right-section">
+        <div class="booking-card">
+
+          <h5>₹ <%= listing.price.toLocaleString("en-IN") %> <span>/ night</span></h5>
+
+          <form>
+
+            <div class="form-group">
+              <label>Check-in</label>
+              <input type="date" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label>Check-out</label>
+              <input type="date" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label>Guests</label>
+              <select class="form-control">
+                <option>1 Guest</option>
+                <option>2 Guests</option>
+                <option>3 Guests</option>
+                <option>4 Guests</option>
+              </select>
+            </div>
+
+            <button type="submit" class="reserve-btn">Reserve</button>
+
+          </form>
+
+        </div>
+      </div>
 
     </div>
-
-    <% if(!currUser) { %>
-        <div class="col-8 offset-3 mb-3">
-            <hr>
-            <h3>Where you'll be</h3>
-            <div id="map"></div>
-        </div>
-    <% } else { %>
-
-        <div>
-            <hr>
-            <h3>Where you'll be</h3>
-            <div id="map"></div>
-        </div>
-
-    <% } %>
-    
-
+  </div>
 </div>
 
 <script src="/js/map.js"></script>

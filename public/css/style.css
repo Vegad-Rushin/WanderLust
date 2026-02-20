@@ -123,3 +123,105 @@ body {
     height: 400px;
     width: 100vh;
 }
+
+/* ===============================
+   AUTH MODAL (Airbnb Style)
+================================= */
+
+body.modal-open {
+    overflow: hidden;
+  }
+  
+  .auth-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  
+    z-index: 2000;
+  }
+  
+  .auth-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .auth-box {
+    position: relative;
+    background: #fff;
+    width: 520px;
+    padding: 2rem;
+    border-radius: 16px;
+  
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+  
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.3s ease;
+  }
+  
+  .auth-overlay.active .auth-box {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  
+  .auth-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 22px;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .auth-box input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .auth-box input:focus {
+    outline: none;
+    border-color: #fe424d;
+    box-shadow: 0 0 0 2px rgba(254, 66, 77, 0.2);
+  }
+  
+  .auth-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background: #fe424d;
+    color: white;
+    font-weight: 600;
+    transition: 0.2s ease;
+  }
+  
+  .auth-btn:hover {
+    background: #e31c5f;
+  }
+
+  .switch-link {
+    color: #fe424d;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  
+  .switch-link:hover {
+    text-decoration: underline;
+  }
+  

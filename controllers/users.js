@@ -1,4 +1,30 @@
+const Listing = require("../models/listing");
 const User = require("../models/user");
+
+module.exports.renderProfilePage = async (req,res) => {
+    const listings = await Listing.find({ owner : req.user._id });
+    res.render("users/profile.ejs",{ listings });;
+};
+
+module.exports.editProfile = async (req,res) => {
+
+    let { username, email } = req.body;
+
+    console.log(req.user._id);
+
+    // let id = res.locals.currUser._id;
+
+    // let editedUser = await User.findByIdAndUpdate(id, {...req.body.user});
+
+    // if(typeof req.file !== "undefined") {
+    //     let url = req.file.path;
+    //     let filename = req.file.filename;
+    //     editedUser.profileImage = {url, filename};        
+    // }
+    
+    
+}
+
 
 module.exports.renderSignupForm = (req,res) => {
     res.render("users/signup.ejs");

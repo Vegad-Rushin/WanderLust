@@ -212,6 +212,20 @@
   </div>
 
   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    
+      const modalElement = document.getElementById("loginModal");
+      const shouldOpen = <%= JSON.stringify(openLoginModal) %>;
+    
+      if (shouldOpen && modalElement) {
+          const loginModal = new bootstrap.Modal(modalElement);
+          loginModal.show();
+      }
+    
+    });
+    </script>
+
+  <script>
 
     let taxSwitch = document.getElementById("switchCheckReverse");
 
