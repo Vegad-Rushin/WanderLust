@@ -1,4 +1,4 @@
-
+<!-- 
 <% layout("/layouts/boilerplate") %>
 
 <style>
@@ -77,5 +77,80 @@
 
         <button class="btn btn-dark mb-3 subBtn">ADD</button>
     </form>
+    </div>
+</div> -->
+
+<% layout("/layouts/boilerplate") %>
+
+<div class="row mt-3">
+    <div class="col-8 offset-2">
+        <h3 class="mb-3">Create a New Listing</h3>
+
+        <form action="/listings" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
+
+            <!-- TITLE -->
+            <div class="mb-4">
+                <label class="form-label">Title</label>
+                <input type="text" name="listing[title]" class="form-control" required>
+                <div class="invalid-feedback">Title is required.</div>
+            </div>
+
+            <!-- DESCRIPTION -->
+            <div class="mb-4">
+                <label class="form-label">Description</label>
+                <textarea name="listing[description]" class="form-control" required></textarea>
+                <div class="invalid-feedback">Description is required.</div>
+            </div>
+
+            <!-- IMAGE -->
+            <div class="mb-4">
+                <label class="form-label">Upload Image</label>
+                <input type="file" name="listing[image]" class="form-control" required>
+            </div>
+
+            <div class="row">
+
+                <!-- PRICE -->
+                <div class="mb-4 col-md-4">
+                    <label class="form-label">Price (₹)</label>
+                    <input type="number" name="listing[price]" class="form-control" required>
+                </div>
+
+                <!-- CATEGORY -->
+                <div class="mb-4 col-md-4">
+                    <label class="form-label">Category</label>
+                    <select name="listing[category]" class="form-select" required>
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="Homes">Homes</option>
+                        <option value="Villas">Villas</option>
+                        <option value="Resorts">Resorts</option>
+                    </select>
+                </div>
+
+                <!-- STATE -->
+                <div class="mb-4 col-md-4">
+                    <label class="form-label">State</label>
+                    <select name="listing[location][state]" class="form-select" required>
+                        <option value="" disabled selected>Select State</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Goa">Goa</option>
+                        <!-- You can add remaining later -->
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- CITY -->
+            <div class="mb-4">
+                <label class="form-label">City</label>
+                <input type="text" name="listing[location][city]" class="form-control" required>
+            </div>
+
+            <button class="btn btn-dark mb-3">ADD</button>
+        </form>
     </div>
 </div>

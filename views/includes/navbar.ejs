@@ -1,236 +1,210 @@
-
 <style>
- /* ================================
-   NAVBAR BASE STYLES
-================================ */
-.navbar,
-.navbar-collapse {
-  background-color: #ffffff !important;
-}
-
-.navbar {
-  padding: 0.6rem 1rem;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-  z-index: 1030;
-}
-
-.navbar .container-fluid {
-  align-items: center;
-}
-
-/* ================================
-   BRAND
-================================ */
-.navbar-brand {
-  font-size: 1.6rem;
-  color: #fe424d;
-}
-
-.navbar-brand:hover {
-  color: #fe424d;
-}
-
-/* ================================
-   NAV LINKS
-================================ */
-.nav-link {
-  font-size: 0.95rem;
-  color: #222;
-  /* transition: color 0.2s ease, transform 0.2s ease; */
-}
-
-/* .nav-link:hover {
-  color: #fe424d;
-  transform: translateX(2px);
-} */
-
-.user {
-  font-weight: 700;
-  text-decoration: underline;
-}
-
-.navbar-nav {
-  display: flex;
-  gap: 0.6rem;
-}
-
-
-/* ================================
-   SEARCH BAR
-================================ */
-.nav-search {
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.search-inp {
-  border-radius: 25px;
-  padding: 0.5rem 1.25rem;
-  border: 1px solid #ddd;
-  transition: box-shadow 0.2s ease;
-}
-
-.search-inp:focus {
-  box-shadow: 0 0 0 2px rgba(254, 66, 77, 0.25);
-  border-color: #fe424d;
-}
-
-.search-btn {
-  background-color: #fe424d;
-  color: #fff;
-  padding: 0.55rem 1.1rem;
-  display: flex;
-  align-items: center;
-  justify-self: center;
-  gap:0.3rem;
-  border-radius: 25px;
-  border: none;
-  transition: all 0.25s ease;
-}
-
-.search-btn i{
-  scale: 1.1; 
-}
-
-.search-btn:hover {
-  background-color: #fff;
-  color: #fe424d;
-  border: 1px solid #fe424d;
-}
-
-.search-btn:active {
-  transform: scale(0.95);
-}
-
-/* ================================
-   COLLAPSE ANIMATION
-================================ */
-.navbar-collapse {
-  transition: all 0.35s ease;
-}
-
-/* ================================
-   DESKTOP LAYOUT
-================================ */
-@media (min-width: 769px) {
-  .nav-search {
-    max-width: 420px;
-  }
-}
-
-/* ================================
-   MOBILE STYLES
-================================ */
-@media (max-width: 768px) {
-
+  /* ================= NAVBAR BASE ================= */
   .navbar {
-    padding: 0.5rem 0.75rem;
+    background: #fff;
+    padding: 0.7rem 2rem;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
   }
 
-  .navbar-collapse {
-    margin-top: 0.5rem;
-    padding: 0.75rem;
-    border-radius: 14px;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+  .navbar .container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
-  .navbar-nav {
-    width: 100%;
-    align-items: flex-start;
+  /* LEFT SIDE WRAPPER */
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
 
-  .navbar-nav + .navbar-nav {
-    margin-top: 0.75rem;
+  /* CENTER */
+  .nav-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  .navbar-nav .nav-link {
-    padding: 0.4rem 0;
-    font-size: 1rem;
+  /* FIXED CENTER WIDTH FOR STABILITY */
+  .nav-center .nav-search {
+    width: 420px;
   }
 
+  /* ================= BRAND ================= */
+  .navbar-brand {
+    font-size: 1.8rem;
+    color: #ff385c;
+  }
+
+  .navbar-brand:hover {
+    color: #ff385c;
+  }
+
+  /* ================= CENTER ================= */
+
+  /* CATEGORY MENU */
+  .category-menu {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .category-item {
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.75;
+    transition: 0.25s ease;
+  }
+
+  .category-item img {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 4px;
+  }
+
+  .category-item span {
+    color: #222;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .category-item:hover {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+
+  /* ================= SEARCH BAR ================= */
   .nav-search {
-    margin-top: 0.5rem;
+    width: 420px;
+    display: flex;
+    background: #fff;
+    border-radius: 40px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
   }
 
-  .search-inp {
-    width: 100%;
-    padding: 0.5rem 1rem;
+  .nav-search input {
+    flex: 1;
+    border: none;
+    padding: 0.6rem 1rem;
+    outline: none;
   }
 
-  .search-btn {
-    padding: 0.5rem 1rem;
-    white-space: nowrap;
+  .nav-search button {
+    background: #ff385c;
+    border: none;
+    color: white;
+    padding: 0 1.5rem;
+    transition: 0.2s ease;
   }
 
-  .user {
-    margin-top: 0.5rem;
+  .nav-search button:hover {
+    background: #e31c5f;
+  }
+
+  /* ================= RIGHT SIDE ================= */
+  .nav-right {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+  }
+
+  .nav-link {
+    color: #222;
+    font-weight: 500;
+    transition: 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: #ff385c;
+  }
+
+  .fa-suitcase-rolling {
     color: #fe424d;
   }
 
-  .auth-box {
-    width: 90%;
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 768px) {
+    .nav-center {
+      display: none;
+    }
+
+    .navbar {
+      padding: 0.6rem 1rem;
+    }
   }
-
-}
-
-/* ================================
-   HAMBURGER ICON ANIMATION
-================================ */
-.navbar-toggler {
-  border: none;
-  transition: transform 0.3s ease;
-}
-
-.navbar-toggler:not(.collapsed) {
-  transform: rotate(90deg);
-}
-
-
 </style>
 
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top ms-1 me-1">
-    <div class="container-fluid nav">
-      <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link" href="/listings">Explore</a>
-        </div>
+<nav class="navbar sticky-top">
+  <div class="container-fluid">
+    <!-- LEFT: LOGO -->
+    <div class="nav-left">
+      <a class="navbar-brand" href="/listings">
+        <i class="fa-regular fa-compass"></i>
+      </a>
 
-        <div class="navbar-nav ms-md-auto my-2 my-md-0">
-
-          <form class="d-flex w-100 nav-search" role="search">
-            <input class="form-control me-2 search-inp" type="search" placeholder="Search destinations" />
-            <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-          </form>
-
-        </div>
-
-        <div class="navbar-nav ms-auto">
-          <a class="nav-link" href="/listings/new">Airbnb your home</a>
-          <% if (!currUser) { %>
-            <button class="nav-link btn p-0 border-0 bg-transparent" id="openLogin">
-              <b>Log in</b>
-            </button>
-          
-            <button class="nav-link btn p-0 border-0 bg-transparent" id="openSignup">
-              <b>Sign up</b>
-            </button>         
-          <% }  else { %>
-              <a class="nav-link user" href="/profile"><%= currUser.username.toUpperCase() %></a>
-              <a class="nav-link" href="/logout"><b>Log out</b></a>
-          <% } %>
-
-        </div>
-      </div>
+      <a class="nav-link" href="/listings">Explore</a>
     </div>
-  </nav>
 
-<script>
+    <!-- CENTER -->
+    <div class="nav-center">
+      <% if (currentPath === "/listings") { %>
 
-    
+      <div class="category-menu">
+        <a href="/listings/category/Homes" class="category-item">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/69/69524.png"
+            alt="Homes"
+          />
+          <span>Homes</span>
+        </a>
 
-</script>
+        <a href="/listings/category/Villas" class="category-item">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/619/619153.png"
+            alt="Villas"
+          />
+          <span>Villas</span>
+        </a>
+
+        <a href="/listings/category/Resorts" class="category-item">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/854/854878.png"
+            alt="Resorts"
+          />
+          <span>Resorts</span>
+        </a>
+      </div>
+
+      <% } else { %>
+
+      <form class="nav-search" action="/listings" method="GET">
+        <input type="text" name="search" placeholder="Search destinations" />
+        <button type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+
+      <% } %>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="nav-right">
+      <% if (!currUser) { %>
+      <button class="border-0 bg-transparent" id="openLogin">Log in</button>
+      <button class="border-0 bg-transparent" id="openSignup">Sign up</button>
+      <% } else { %>
+      <a class="nav-link" href="/listings/new">Airbnb your home</a>
+      <a class="nav-link fw-bold" href="/profile"><%= currUser.username %></a>
+      <a href="/bookings" class="nav-link">
+        <i class="fa-solid fa-suitcase-rolling"></i> My Trips
+      </a>
+      <a class="nav-link" href="/logout">Log out</a>
+      <% } %>
+    </div>
+  </div>
+</nav>

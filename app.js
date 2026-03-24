@@ -20,6 +20,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
+const bookingRoutes = require("./routes/bookings");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
@@ -89,8 +90,9 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req,res,next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
-    res.locals.openLoginModal = req.flash("openLoginModal")[0] || false; // ✅ FIX
+    res.locals.openLoginModal = req.flash("openLoginModal")[0] || false;
     res.locals.currUser = req.user;
+    res.locals.currentPath = req.path;
     next();
 })
 
@@ -107,6 +109,7 @@ app.use((req,res,next) => {
 
 
 app.use("/listings", listingRouter);
+app.use("/bookings", bookingRoutes);
 app.use("/listings/:id/reviews", reviewRouter);
 
 // ROOT Route

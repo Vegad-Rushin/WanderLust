@@ -1,0 +1,171 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: #f7f7f7;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+
+  .title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+
+  /* ================= BOOKING CARD ================= */
+
+  .booking-card {
+    display: flex;
+    gap: 20px;
+    background: white;
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  }
+
+  .booking-card img {
+    width: 180px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .booking-info {
+    flex: 1;
+  }
+
+  .booking-info h4 {
+    margin: 0;
+  }
+
+  .booking-info p {
+    margin: 6px 0;
+    color: #555;
+  }
+
+  .price {
+    font-weight: 600;
+  }
+
+  .status {
+    display: inline-block;
+    background: #cce8d4;
+    color: #2d7a46;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-top: 6px;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 25px 0 15px 0;
+  }
+
+  .no-booking {
+    color: #666;
+  }
+
+  .listing-link {
+    color: #555;
+  }
+
+  /* .booking-card:hover {
+    /* scale: 1.01; */
+    box-shadow: 0 15px 30px #ff385c;
+  } */
+
+</style>
+
+<div class="container">
+  <h2 class="title">My Bookings</h2>
+
+  <!-- ================= UPCOMING BOOKINGS ================= -->
+
+  <h3 class="section-title">Upcoming Trips</h3>
+
+  <% if(upcomingBookings.length === 0){ %>
+
+  <p class="no-booking">No upcoming trips.</p>
+
+  <% } %> <% upcomingBookings.forEach(booking => { %>
+
+  <a href="/listings/<%= booking.listing._id %>" class="listing-link">
+    <div class="booking-card">
+      <img src="<%= booking.listing.image.url %>" />
+
+      <div class="booking-info">
+        <h4><%= booking.listing.title %></h4>
+
+        <p>
+          📍 <%= booking.listing.location.city %>, <%=
+          booking.listing.location.state %>
+        </p>
+
+        <p>
+          📅 <%= booking.checkIn.toDateString() %> – <%=
+          booking.checkOut.toDateString() %>
+        </p>
+
+        <p>👥 <%= booking.guests %> Guests</p>
+
+        <p class="price">
+          Total Paid: ₹ <%= booking.totalPrice.toLocaleString("en-IN") %>
+        </p>
+
+        <span class="status">Upcoming</span>
+      </div>
+    </div>
+  </a>
+
+  <% }) %>
+
+  <!-- ================= PAST BOOKINGS ================= -->
+
+  <h3 class="section-title">Past Trips</h3>
+
+  <% if(pastBookings.length === 0){ %>
+
+  <p class="no-booking">No past trips.</p>
+
+  <% } %> <% pastBookings.forEach(booking => { %>
+
+  <div class="booking-card">
+    <img src="<%= booking.listing.image.url %>" />
+
+    <div class="booking-info">
+      <h4><%= booking.listing.title %></h4>
+
+      <p>
+        📍 <%= booking.listing.location.city %>, <%=
+        booking.listing.location.state %>
+      </p>
+
+      <p>
+        📅 <%= booking.checkIn.toDateString() %> – <%=
+        booking.checkOut.toDateString() %>
+      </p>
+
+      <p>👥 <%= booking.guests %> Guests</p>
+
+      <p class="price">
+        Total Paid: ₹ <%= booking.totalPrice.toLocaleString("en-IN") %>
+      </p>
+
+      <span class="status" style="background: #eee; color: #666"
+        >Completed</span
+      >
+    </div>
+  </div>
+
+  <% }) %>
+</div>

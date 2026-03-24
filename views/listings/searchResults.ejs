@@ -1,0 +1,171 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  body {
+    background: #f7f7f7;
+  }
+
+  /* PAGE TITLE */
+
+  .search-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 2rem 2rem 1rem 2rem;
+  }
+
+  /* GRID */
+
+  .listings-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.6rem;
+    padding: 0 2rem 2rem 2rem;
+  }
+
+  /* CARD */
+
+  .listing-card {
+    background: white;
+    border-radius: 18px;
+    height: 300px;
+    overflow: hidden;
+    padding: 0.5rem;
+    transition: 0.25s ease;
+  }
+
+  .listing-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  /* IMAGE */
+
+  .card-img img {
+    width: 100%;
+    height: 190px;
+    border-radius: 18px;
+    object-fit: cover;
+  }
+
+  /* CARD BODY */
+
+  .card-body {
+    padding: 0.8rem 0.9rem 1rem 0.9rem;
+  }
+
+  .card-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .card-location {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0.3rem;
+  }
+
+  .card-price {
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  .listing-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  /* ================= SEARCH BAR ================= */
+  .search-section {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0 1.5rem 0;
+  }
+
+  .search-box {
+    width: 50%;
+    display: flex;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+
+  .search-box input {
+    flex: 1;
+    border: none;
+    padding: 1rem 1.6rem;
+    font-size: 0.95rem;
+    outline: none;
+  }
+
+  .search-box button {
+    background: #ff385c;
+    border: none;
+    padding: 0 2rem;
+    color: white;
+    font-weight: 600;
+  }
+  .search-box button:hover {
+    background: #ff4466;
+  }
+
+  /* NO RESULT */
+
+  .no-result {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 1.2rem;
+    color: #666;
+  }
+</style>
+
+<body>
+  <!-- SEARCH -->
+  <div class="search-section">
+    <form class="search-box" action="/listings" method="GET">
+      <input
+        type="text"
+        name="search"
+        value="<%= search %>"
+        placeholder="Search destinations..."
+      />
+      <button type="submit">Search</button>
+    </form>
+  </div>
+
+  <h3 class="search-title">Search results for "<%= search %>"</h3>
+
+  <% if(listings.length === 0){ %>
+
+  <div class="no-result">No stays found for "<%= search %>"</div>
+
+  <% } else { %>
+
+  <div class="listings-container">
+    <% listings.forEach(listing => { %>
+
+    <a href="/listings/<%= listing._id %>" class="listing-link">
+      <div class="listing-card">
+        <div class="card-img">
+          <img src="<%= listing.image.url %>" alt="" />
+        </div>
+
+        <div class="card-body">
+          <div class="card-title"><%= listing.title %></div>
+
+          <div class="card-location">
+            <%= listing.location.city %>, <%= listing.location.state %>
+          </div>
+
+          <div class="card-price">
+            ₹ <%= listing.price.toLocaleString("en-IN") %> / night
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <% }) %>
+  </div>
+
+  <% } %>
+</body>

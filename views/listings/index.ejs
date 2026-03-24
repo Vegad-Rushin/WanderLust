@@ -1,266 +1,226 @@
-
 <% layout("/layouts/boilerplate") %>
 
 <style>
-  #belowNav-options {
+body {
+  background-color: #f7f7f7;
+}
+
+/* ================= SEARCH BAR ================= */
+.search-section {
   display: flex;
-  align-items: center;
-  justify-content: space-between; /* 🔥 key */
-  width: 100%;
-  padding: 1rem 1.5rem 0 1rem; /* optional spacing from edges */
-}
-
-/* LEFT SIDE FILTERS */
-.filter-options {
-  border: 1px solid #fe424d;
-  border-radius: 1rem;
-  padding: 1rem 0.5rem 0 0.5rem;
-  display: flex;
-  gap: 2rem;
-  width: 55%;              /* 👈 exactly 50% */
-  overflow-x: auto;
-  scrollbar-width: none;
-  white-space: nowrap;
-}
-
-/* individual filter */
-.filter {
-  text-align: center;
-  opacity: 0.7;
-  flex-shrink: 0;          /* prevents shrinking */
-}
-
-.filter i {
-  font-size: 1.5rem;
-}
-
-.filter p {
-  font-size: 0.8rem;
-}
-
-.filter:hover {
-  opacity: 1;
-  transform: scale(1.1);
-  cursor: pointer;
-  color: #fe424d;
-}
-
-/* RIGHT SIDE TOGGLE */
-.tax-toggle {
-  width: 20%;              /* 👈 exactly 20% */
-  min-width: max-content;  /* prevents squeezing */
-  border: 1px solid #fe424d;
-  border-radius: 1rem;
-  height: 3.2rem;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
   justify-content: center;
+  margin: 2rem 0 1.5rem 0;
 }
 
-/* Card price */
-
-.card-text {
-  display: inline;
+.search-box {
+  width: 50%;
+  display: flex;
+  background: white;
+  border-radius: 50px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  overflow: hidden;
 }
 
-
-/* @media (max-width: 992px) {
-  .filter-options {
-    width: 65%;
-  }
-
-  .tax-toggle {
-    width: auto;
-  }
-} */
-
-@media (max-width: 768px) {
-
-#belowNav-options {
-  flex-wrap: wrap;              /* 🔥 allow wrapping */
-  gap: 1rem;
+.search-box input {
+  flex: 1;
+  border: none;
+  padding: 1rem 1.6rem;
+  font-size: 0.95rem;
+  outline: none;
 }
 
-.filter i {
-  font-size: 1.6rem;
+.search-box button {
+  background: #ff385c;
+  border: none;
+  padding: 0 2rem;
+  color: white;
+  font-weight: 600;
+}
+.search-box button:hover {
+  background: #ff4466;
 }
 
-.filter p {
+/* ================= SECTION TITLE ================= */
+.section-wrapper {
+  padding: 0 2rem;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  margin-top: 1rem;
+}
+
+/* ================= HORIZONTAL SCROLL ================= */
+.horizontal-scroll {
+  display: flex;
+  gap: 1.3rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 1rem;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ================= CARD ================= */
+.listing-card {
+  min-width: 270px;      /* smaller than before */
+  min-height: 280px;
+  max-width: 270px;
+  padding: 0.5rem;
+  border-radius: 18px;
+  overflow: hidden;
+  background: white;
+  transition: 0.25s ease;
+}
+
+.listing-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+.card-img-wrapper {
+  position: relative;
+}
+
+.card-img-wrapper img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+/* Wishlist */
+.wishlist {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: white;
+  padding: 6px 8px;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+/* CARD BODY (FIXED PROPER PADDING) */
+.card-body {
+  padding: 0.6rem 0.3rem 0.2rem 0.3rem;
+}
+
+.card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.card-price {
   font-size: 0.9rem;
+  font-weight: 500;
+  color: #555;
 }
 
-.filter-options {
-  border: 1px solid #fe424d;
-  border-radius: 1rem;
-  padding: 0.8rem 0.8rem 0 1.2rem ;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;            /* 👈 exactly 50% */
-  gap: 3rem;
-  width: 100%;                  /* 🔥 take full width */
-  overflow-x: auto;
-  scrollbar-width: none;
-  white-space: nowrap;
+.listing-link {
+  text-decoration: none;
+  color: inherit;
 }
 
-.tax-toggle {
-  display: flex;
-                    /* 🔥 move to next line */
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  /* padding: 0.75rem 1rem; */
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  margin-top: 2.5rem;
 }
 
-.form-check {
-  width: 100%;
-  justify-content: space-between;
+.section-title a {
+  color: #ff385c;
+  transition: 0.2s ease;
 }
+
+.section-title a:hover {
+  opacity: 0.7;
 }
 
+/* RESPONSIVE */
+@media(max-width:768px){
+  .search-box {
+    width: 90%;
+  }
 
+  .section-wrapper {
+    padding: 0 1rem;
+  }
 
+  .listing-card {
+    min-width: 240px;
+    max-width: 240px;
+  }
+
+  .card-img-wrapper img {
+    height: 170px;
+  }
+}
 </style>
 
 <body>
 
-  <div id="belowNav-options">
-
-    <div class="filter-options">
-      <div class="filter">
-        <div><i class="fa-solid fa-fire"></i></div>
-        <p>Trending</p>
-      </div>
-  
-      <div class="filter">
-        <div><i class="fa-solid fa-bed"></i></div>
-        <p>Room</p>
-      </div>
-  
-      <div class="filter">
-        <div><i class="fa-solid fa-mountain-city"></i></div>
-        <p>Iconic cities</p>
-      </div>
-  
-      <div class="filter">
-        <div><i class="fa-solid fa-mountain"></i></div>
-        <p>Mountains</p>
-      </div>
-  
-      <div class="filter">
-        <div><i class="fa-brands fa-fort-awesome"></i></div>
-        <p>Castles</p>
-      </div>
-  
-      <div class="filter">
-        <div><i class="fa-solid fa-person-swimming"></i></div>
-        <p>Amazing pools</p>
-      </div>
-  
-      <div class="filter">
-        <div><i class="fa-solid fa-campground"></i></div>
-        <p>Camping</p>
-      </div>
-  
-      <div class="filter">
-        <div><i class="fa-solid fa-cow"></i></div>
-        <p>Farms</p>
-      </div>
-  
-      <div class="filter">
-        <div><i class="fa-regular fa-snowflake"></i></div>
-        <p>Arctic</p>
-      </div>
-
-      <div class="filter">
-        <div><i class="fa-solid fa-leaf"></i></div>
-        <p>Nature</p>
-      </div>
-    </div>
-
-
-    <div class="tax-toggle">
-      <div class="form-check form-switch form-check-reverse">
-        <input class="form-check-input" type="checkbox" id="switchCheckReverse">
-        <label class="form-check-label" for="switchCheckReverse">Display total after taxes</label>
-      </div>
-    </div>
-
+  <!-- SEARCH -->
+  <div class="search-section">
+    <form class="search-box" action="/listings" method="GET">
+      <input type="text" name="search" placeholder="Search destinations..." />
+      <button type="submit">Search</button>
+    </form>
   </div>
 
-  <div class="container-fluid mt-3 px-1">
+  <!-- SECTION -->
+  <div class="section-wrapper">
 
-    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1">
+    <% groupedListings.forEach(group => { %>
 
-        <% for(listing of allListings) { %>
+      <div class="section-title d-flex justify-content-between align-items-center">
+        <span>Stays in <%= group._id %></span>
+    
+        <a href="/listings/state/<%= group._id %>" 
+           style="font-size: 0.9rem; text-decoration: none; font-weight: 500;">
+           Show All
+        </a>
+      </div>
+    
+      <div class="horizontal-scroll">
+    
+        <% group.listings.forEach(listing => { %>
+    
           <a href="/listings/<%= listing._id %>" class="listing-link">
-            <div class="card col listing-card">
-                <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.title %> - image" style="height: 18rem;">
-                <div class="card-img-overlay"></div>
-                <div class="card-body">
-                  <h5 class="card-title"><b><%= listing.title %></b></h5>
-                  <p class="card-text">&#8377; <%= listing.price.toLocaleString("en-IN") %> </p> <span>/ night</span>
-                  <!-- <a href="/listings/" class="btn btn-primary">Book now</a> -->
+            <div class="listing-card">
+    
+              <div class="card-img-wrapper">
+                <img src="<%= listing.image.url %>" alt="">
+                <!-- <div class="wishlist">
+                  <i class="fa-regular fa-heart"></i>
+                </div> -->
+              </div>
+    
+              <div class="card-body">
+                <div class="card-title">
+                  <%= listing.title %>
                 </div>
+    
+                <div class="card-price">
+                  ₹ <%= listing.price.toLocaleString("en-IN") %> / night
+                </div>
+              </div>
+    
             </div>
           </a>
-        <% } %>
-
-    </div>
+    
+        <% }) %>
+    
+      </div>
+    
+    <% }) %>
 
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    
-      const modalElement = document.getElementById("loginModal");
-      const shouldOpen = <%= JSON.stringify(openLoginModal) %>;
-    
-      if (shouldOpen && modalElement) {
-          const loginModal = new bootstrap.Modal(modalElement);
-          loginModal.show();
-      }
-    
-    });
-    </script>
-
-  <script>
-
-    let taxSwitch = document.getElementById("switchCheckReverse");
-
-    taxSwitch.addEventListener("change", (e) => {
-
-      let taxInfo = document.getElementsByClassName("tax-info");
-      let prices = document.getElementsByClassName("card-text");
-
-
-      for(let price of prices) {
-
-        // Store base price ONCE
-        if (!price.dataset.basePrice) {
-          let base = parseInt(
-            price.innerText.replace(/[^\d]/g, "")
-          );
-          price.dataset.basePrice = base;
-        }
-
-        let numPrice = Number(price.dataset.basePrice);
-        let gst = Number((numPrice * 0.18));
-
-        if(taxSwitch.checked) {
-          let total = numPrice + gst;
-          price.innerText = `₹ ${Math.round(total).toLocaleString("en-IN")} ( ₹ ${numPrice.toLocaleString("en-IN")} + ₹ ${gst.toLocaleString("en-IN")} GST )`;
-        } else {
-          price.innerText = `₹ ${numPrice.toLocaleString("en-IN")}`;
-        }
-        
-      }
-      
-    })
-
-  </script>
-
 </body>
-
-
