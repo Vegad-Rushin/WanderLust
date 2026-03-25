@@ -127,30 +127,6 @@ module.exports.showBookings = async (req,res) => {
 
 }
 
-// module.exports.createListing = async (req,res,next) => {
-
-//     let response = await geocodingClient
-//         .forwardGeocode({
-//             query: req.body.listing.location,
-//             limit: 1,
-//         })
-//         .send();
-
-//     let url = req.file.path;
-//     let filename = req.file.filename;
-//     // const {title,description,image,price,country,location} = req.body; // Not the better way.
-//     const newListing = new Listing(req.body.listing);
-//     newListing.owner = req.user._id;
-//     newListing.image = {url, filename};
-//     newListing.geometry = response.body.features[0].geometry;
-    
-//     let savedListing = await newListing.save();
-//     console.log(savedListing);
-
-//     req.flash("success", "New Listing Created!");
-//     res.redirect("/listings");
-// }
-
 module.exports.createListing = async (req, res, next) => {
 
     const { city, state } = req.body.listing.location;
@@ -194,12 +170,54 @@ module.exports.renderEditForm = async (req,res) => {
 };
 
 
-module.exports.updateListing = async (req,res) => {
-    let {id} = req.params;
+// module.exports.updateListing = async (req,res) => {
+//     let {id} = req.params;
 
+//     let response = await geocodingClient
+//         .forwardGeocode({
+//             query: req.body.listing.location,
+//             limit: 1,
+//         })
+//         .send();
+
+//     if (!response.body.features.length) {
+//         req.flash("error", "Invalid location");
+//         return res.redirect(`/listings/${id}/edit`);
+//     }
+
+//     const newGeometry = response.body.features[0].geometry;
+
+//     let listing = await Listing.findByIdAndUpdate(id, {...req.body.listing, geometry: newGeometry});
+
+//     if (!listing) {
+//         req.flash("error", "Listing not found");
+//         return res.redirect("/listings");
+//     }
+    
+//     console.log(listing);
+
+//     if(typeof req.file !== "undefined") {
+//         let url = req.file.path;
+//         let filename = req.file.filename;
+//         listing.image = {url, filename};
+//         await listing.save();
+//     }
+
+//     req.flash("success", "Listing Updated!");
+//     res.redirect(`/listings/${id}`);
+// };
+
+module.exports.updateListing = async (req, res) => {
+    let { id } = req.params;
+
+    // 🔹 Prepare location string
+    let locationData = req.body.listing.location;
+    let fullLocation = `${locationData.city}, ${locationData.state}`;
+
+    // 🔹 Get coordinates from Mapbox
     let response = await geocodingClient
         .forwardGeocode({
-            query: req.body.listing.location,
+            query: fullLocation,
             limit: 1,
         })
         .send();
@@ -209,29 +227,20 @@ module.exports.updateListing = async (req,res) => {
         return res.redirect(`/listings/${id}/edit`);
     }
 
-    const newGeometry = response.body.features[0].geometry;
+    let geometry = response.body.features[0].geometry;
 
-    let listing = await Listing.findByIdAndUpdate(id, {...req.body.listing, geometry: newGeometry});
+    // 🔹 Update listing
+    let listing = await Listing.findByIdAndUpdate(id, {
+        ...req.body.listing,
+        geometry: geometry
+    });
 
-    if (!listing) {
-        req.flash("error", "Listing not found");
-        return res.redirect("/listings");
-    }
-    
-    console.log(listing);
-
-    // if (req.file) {
-    //     listing.image = {
-    //         url: req.file.path,
-    //         filename: req.file.filename,
-    //     };
-    //     await listing.save();
-    // }
-
-    if(typeof req.file !== "undefined") {
-        let url = req.file.path;
-        let filename = req.file.filename;
-        listing.image = {url, filename};
+    // 🔹 Update image if new uploaded
+    if (req.file) {
+        listing.image = {
+            url: req.file.path,
+            filename: req.file.filename
+        };
         await listing.save();
     }
 

@@ -37,14 +37,14 @@ router.get("/new", isLoggedIn, listingController.renderNewForm);
 
 router
   .route("/:id")
-  .get(wrapAsync(listingController.showListing));
+  .get(wrapAsync(listingController.showListing))
+  .put(isLoggedIn, isOwner, upload.single("listing[image]"), wrapAsync(listingController.updateListing))
+  .delete(wrapAsync(listingController.destroyListing));
 
 // Edit Route
-router.get(
-  "/:id/edit",
-  isLoggedIn,
-  isOwner,
-  wrapAsync(listingController.renderEditForm)
-);
+router
+  .route("/:id/edit")
+  .get(isLoggedIn, isOwner, wrapAsync(listingController.renderEditForm));
+
 
 module.exports = router;

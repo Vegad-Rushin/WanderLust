@@ -199,9 +199,7 @@
         <% if(currUser && listing.owner &&
         currUser._id.equals(listing.owner._id)) { %>
         <div class="btns">
-          <a href="/listings/<%= listing._id %>/edit" class="btn subBtn"
-            >Edit</a
-          >
+          <a href="/listings/<%= listing._id %>/edit" class="btn subBtn"> Edit </a>
 
           <form
             method="POST"

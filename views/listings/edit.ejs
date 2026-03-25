@@ -1,59 +1,189 @@
-
 <% layout("/layouts/boilerplate") %>
 
-<div class="row mt-3">
-    <div class="col-8 offset-2">
+<style>
+/* ================= CONTAINER ================= */
+.edit-container {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 0 16px;
+}
 
-    <h3 style="padding-bottom: 10px;">Edit your Listing</h3>
-    <form method="POST" action="/listings/<%=listing._id%>?_method=PUT" class="needs-validation" enctype="multipart/form-data" novalidate>
+/* ================= CARD ================= */
+.edit-card {
+  background: white;
+  padding: 22px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
 
-        <div class="mb-4">
-            <label for="title" class="form-label">Title</label>
-            <input type="text" name="listing[title]" class="form-control" value="<%= listing.title %>" required>
-            <div class="invalid-feedback">Title should be valid</div>
-        </div>
-        
-        <div class="mb-4">
-            <label for="description" class="form-label">Description</label>
-            <textarea name="listing[description]" class="form-control" required><%= listing.description %></textarea>
-            <div class="invalid-feedback">Please enter a short description.</div>
-        </div>
-        
-        <div class="mb-3">
-            Original Listign Image <br>
-            <img src="<%=originalImageUrl%>" alt="<%=listing.image.filename%>">
+/* ================= TITLE ================= */
+.edit-card h3 {
+  font-size: 24px;
+  margin-bottom: 18px;
+}
+
+/* ================= IMAGE ================= */
+.edit-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-top: 8px;
+}
+
+/* ================= INPUTS ================= */
+.form-control {
+  border-radius: 10px;
+  padding: 10px;
+}
+
+/* ================= BUTTON ================= */
+.btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+
+  .edit-container {
+    margin: 20px auto;
+  }
+
+  .edit-card {
+    padding: 16px;
+  }
+
+  .edit-card h3 {
+    font-size: 20px;
+  }
+
+  /* STACK STATE + CITY */
+  .row {
+    flex-direction: column;
+  }
+
+  .col-md-6 {
+    width: 100%;
+  }
+}
+
+/* ================= DESKTOP IMPROVEMENT ================= */
+@media (min-width: 1024px) {
+
+  .edit-container {
+    max-width: 800px;
+  }
+
+  .edit-card {
+    padding: 28px;
+  }
+
+  .edit-card h3 {
+    font-size: 26px;
+  }
+}
+
+/* ================= INPUT FOCUS ================= */
+.form-control:focus {
+  border-color: #ff385c;
+  box-shadow: 0 0 0 2px rgba(255,56,92,0.2);
+}
+</style>
+
+
+<div class="container edit-container">
+  <div class="edit-card">
+
+    <h3>Edit your Listing</h3>
+
+    <form method="POST" 
+      action="/listings/<%= listing._id %>?_method=PUT" 
+      class="needs-validation" 
+      enctype="multipart/form-data" 
+      novalidate>
+
+      <!-- TITLE -->
+      <div class="mb-4">
+        <label class="form-label">Title</label>
+        <input type="text" 
+          name="listing[title]" 
+          class="form-control" 
+          value="<%= listing.title %>" 
+          required>
+        <div class="invalid-feedback">Title should be valid</div>
+      </div>
+
+      <!-- DESCRIPTION -->
+      <div class="mb-4">
+        <label class="form-label">Description</label>
+        <textarea 
+          name="listing[description]" 
+          class="form-control" 
+          rows="3"
+          required><%= listing.description %></textarea>
+        <div class="invalid-feedback">Please enter a description.</div>
+      </div>
+
+      <!-- IMAGE -->
+      <div class="mb-3">
+        <label class="form-label">Original Listing Image</label>
+        <img src="<%= originalImageUrl %>" alt="Listing Image">
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Upload New Image</label>
+        <input type="file" name="listing[image]" class="form-control">
+      </div>
+
+      <!-- PRICE -->
+      <div class="mb-4">
+        <label class="form-label">Price</label>
+        <input type="number" 
+          name="listing[price]" 
+          class="form-control" 
+          value="<%= listing.price %>" 
+          required>
+      </div>
+
+      <!-- LOCATION -->
+      <div class="row">
+
+        <!-- STATE -->
+        <div class="mb-3 col-md-6">
+          <label class="form-label">State</label>
+          <select name="listing[location][state]" class="form-control" required>
+            <option value="">Select State</option>
+
+            <% const states = ["Gujarat","Maharashtra","Rajasthan","Delhi"]; %>
+
+            <% states.forEach(state => { %>
+              <option value="<%= state %>" 
+                <%= listing.location.state === state ? "selected" : "" %>>
+                <%= state %>
+              </option>
+            <% }) %>
+
+          </select>
         </div>
 
-        <div class="mb-3">
-            <label for="image" class="form-label">Upload New Image</label>
-            <input type="file" name="listing[image]" class="form-control">
+        <!-- CITY -->
+        <div class="mb-3 col-md-6">
+          <label class="form-label">City</label>
+          <input type="text" 
+            name="listing[location][city]" 
+            class="form-control" 
+            value="<%= listing.location.city %>" 
+            required>
         </div>
 
-        <div class="row">
+      </div>
 
-            <div class="mb-3 col-md-4">
-                <label for="price" class="form-label">Price</label>
-                <input type="number" name="listing[price]" class="form-control" value="<%= listing.price %>" required>
-                <div class="invalid-feedback">Price should be valid</div>
-            </div>
+      <button class="btn btn-dark mt-3">Update Listing</button>
 
-            <div class="mb-3 col-md-8">
-                <label for="country" class="form-label">Country</label>
-                <input type="text" name="listing[country]" class="form-control" value="<%= listing.country %>" required>
-                <div class="invalid-feedback">Country name should be valid</div>
-            </div>
-       
-        </div>
-        
-        <div class="mb-3">
-            <label for="location" class="form-label">Location</label>
-            <input type="text" name="listing[location]" class="form-control" value="<%= listing.location %>" required>
-            <div class="invalid-feedback">Location should be valid</div>
-        </div>
-        
-        <br>
-        <button class="btn btn-dark mb-3 subBtn">EDIT</button>
     </form>
 
-    </div>
+  </div>
 </div>
