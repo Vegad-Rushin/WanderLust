@@ -155,16 +155,15 @@
     }
 
     .category-item img {
-    width: 24px;
-    height: 24px;
-  }
+      width: 24px;
+      height: 24px;
+    }
 
-  .category-item span {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #222;
-  }
-
+    .category-item span {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #222;
+    }
   }
 </style>
 
@@ -205,8 +204,10 @@
       <!-- DESKTOP MENU -->
       <div class="desktop-menu">
         <% if (!currUser) { %>
-        <button class="border-0 bg-transparent">Log in</button>
-        <button class="border-0 bg-transparent">Sign up</button>
+        <!-- <button class="border-0 bg-transparent">Log in</button>
+        <button class="border-0 bg-transparent">Sign up</button> -->
+        <button class="openLogin border-0 bg-transparent">Log in</button>
+        <button class="openSignup border-0 bg-transparent">Sign up</button>
         <% } else { %>
         <a class="nav-link" href="/listings/new">Airbnb your home</a>
         <a class="nav-link fw-bold" href="/profile"><%= currUser.username %></a>
@@ -227,8 +228,8 @@
   <!-- MOBILE DROPDOWN -->
   <div class="mobile-menu" id="mobileMenu">
     <% if (!currUser) { %>
-    <a href="#">Log in</a>
-    <a href="#">Sign up</a>
+    <button class="openLogin border-0 bg-transparent">Log in</button>
+    <button class="openSignup border-0 bg-transparent">Sign up</button>
     <% } else { %>
     <a href="/listings/new">Airbnb your home</a>
     <a href="/bookings"
@@ -240,11 +241,182 @@
   </div>
 </nav>
 
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" id="closeLogin">&times;</span>
+    <h3>Welcome Back</h3>
+    <form action="/login" method="POST">
+      <input type="text" name="username" placeholder="Username" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <button type="submit">Log In</button>
+    </form>
+    <p style="text-align:center; margin-top: 10px; font-size:0.9rem;">
+      Don't have an account?
+      <span style="color:#ff385c; cursor:pointer;" id="openSignupFromLogin">Sign up</span>
+    </p>
+  </div>
+</div>
+
+<!-- SIGNUP MODAL -->
+<div id="signupModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" id="closeSignup">&times;</span>
+    <h3>Create Your Account</h3>
+    <form action="/signup" method="POST">
+      <input type="text" name="username" placeholder="Username" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+    <p style="text-align:center; margin-top: 10px; font-size:0.9rem;">
+      Already have an account?
+      <span style="color:#ff385c; cursor:pointer;" id="openLoginFromSignup">Sign in</span>
+    </p>
+  </div>
+</div>
+
+<style>
+  /* ================= MODAL ================= */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-content {
+    background-color: #fff;
+    margin: 8% auto;
+    padding: 30px 25px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    position: relative;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: #888;
+    transition: 0.2s;
+  }
+
+  .close-modal:hover {
+    color: #ff385c;
+  }
+
+  .modal h3 {
+    text-align: center;
+    color: #222;
+    margin-bottom: 20px;
+  }
+
+  .modal form input {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: 0.2s;
+  }
+
+  .modal form input:focus {
+    border-color: #ff385c;
+    outline: none;
+  }
+
+  .modal form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff385c;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 15px;
+    transition: 0.2s;
+  }
+
+  .modal form button:hover {
+    background-color: #e0294d;
+  }
+</style>
+
 <script>
+  // ================= MODAL SCRIPT =================
+  const loginModal = document.getElementById("loginModal");
+  const signupModal = document.getElementById("signupModal");
+  const closeLogin = document.getElementById("closeLogin");
+  const closeSignup = document.getElementById("closeSignup");
+
+  function showLoginModal() {
+    loginModal.style.display = "block";
+    signupModal.style.display = "none"; // hide signup if open
+    mobileMenu.style.display = "none"; // hide mobile menu if open
+  }
+
+  function showSignupModal() {
+    signupModal.style.display = "block";
+    loginModal.style.display = "none"; // hide login if open
+    mobileMenu.style.display = "none"; // hide mobile menu if open
+  }
+
+  closeLogin.onclick = () => loginModal.style.display = "none";
+  closeSignup.onclick = () => signupModal.style.display = "none";
+
+  window.onclick = (e) => {
+    if (e.target === loginModal) loginModal.style.display = "none";
+    if (e.target === signupModal) signupModal.style.display = "none";
+  }
+
+  // Buttons inside modals for switching
+  const openLoginFromSignup = document.getElementById("openLoginFromSignup");
+  const openSignupFromLogin = document.getElementById("openSignupFromLogin");
+
+  openLoginFromSignup.onclick = showLoginModal;
+  openSignupFromLogin.onclick = showSignupModal;
+
+  // Navbar buttons (desktop + mobile)
+  document.querySelectorAll(".openLogin").forEach(btn => {
+    btn.addEventListener("click", showLoginModal);
+  });
+  document.querySelectorAll(".openSignup").forEach(btn => {
+    btn.addEventListener("click", showSignupModal);
+  });
+
+  // ================= MOBILE MENU (HAMBURGER) =================
   const toggle = document.getElementById("menuToggle");
-  const menu = document.getElementById("mobileMenu");
+  const mobileMenu = document.getElementById("mobileMenu");
 
   toggle.addEventListener("click", () => {
-    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    // Toggle display between flex and none
+    if (mobileMenu.style.display === "flex") {
+      mobileMenu.style.display = "none";
+    } else {
+      mobileMenu.style.display = "flex";
+      mobileMenu.style.flexDirection = "column";
+    }
+  });
+
+  // Close mobile menu when clicking login/signup
+  document.querySelectorAll(".mobile-menu .openLogin").forEach(btn => {
+    btn.addEventListener("click", () => mobileMenu.style.display = "none");
+  });
+  document.querySelectorAll(".mobile-menu .openSignup").forEach(btn => {
+    btn.addEventListener("click", () => mobileMenu.style.display = "none");
   });
 </script>
