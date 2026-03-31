@@ -105,9 +105,17 @@
   .save-btn:hover {
     opacity: 0.9;
   }
-  
 
-  .my-booking {
+  .profile-opt {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .opt {
+    width: 10rem !important;
     padding: 10px 18px;
     background: #fe424d;
     text-decoration: none;
@@ -117,7 +125,7 @@
     font-size: 0.95rem;
   }
 
-  .my-booking:hover {
+  .opt:hover {
     opacity: 0.9;
   }
 
@@ -219,8 +227,10 @@
       <h2><%= currUser.username %></h2>
       <p><%= currUser.email %></p>
 
-      <div>
-          <a href="/bookings" class="my-booking">My bookings</a>
+      <div class="profile-opt">
+        <a href="/bookings" class="opt">My bookings</a>
+  
+        <a href="/listings/new" class="opt">Add your listing!</a>
       </div>
     </div>
 

@@ -35,8 +35,9 @@
     color: #ff385c;
   }
 
-  .fa-suitcase-rolling {
+  .icon {
     color: #ff385c;
+    margin-right: 0.15rem;
   }
 
   /* ================= CENTER ================= */
@@ -129,6 +130,10 @@
       padding: 0.6rem 0.3rem;
     }
 
+    .icon {
+      margin-right: 0.4rem;
+    }
+
     /* HIDE EXPLORE */
     .nav-left .nav-link {
       display: none;
@@ -166,115 +171,6 @@
     }
   }
 </style>
-
-<nav class="navbar sticky-top">
-  <div class="container-fluid">
-    <!-- LEFT -->
-    <div class="nav-left">
-      <a class="navbar-brand" href="/listings">
-        <i class="fa-regular fa-compass"></i>
-      </a>
-
-      <!-- Hidden on mobile -->
-      <a class="nav-link" href="/listings">Explore</a>
-    </div>
-
-    <!-- CENTER -->
-    <div class="nav-center">
-      <div class="category-menu">
-        <a href="/listings/category/Homes" class="category-item">
-          <img src="https://cdn-icons-png.flaticon.com/512/69/69524.png" />
-          <span>Homes</span>
-        </a>
-
-        <a href="/listings/category/Villas" class="category-item">
-          <img src="https://cdn-icons-png.flaticon.com/512/619/619153.png" />
-          <span>Villas</span>
-        </a>
-
-        <a href="/listings/category/Resorts" class="category-item">
-          <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" />
-          <span>Resorts</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- RIGHT -->
-    <div class="nav-right">
-      <!-- DESKTOP MENU -->
-      <div class="desktop-menu">
-        <% if (!currUser) { %>
-        <!-- <button class="border-0 bg-transparent">Log in</button>
-        <button class="border-0 bg-transparent">Sign up</button> -->
-        <button class="openLogin border-0 bg-transparent">Log in</button>
-        <button class="openSignup border-0 bg-transparent">Sign up</button>
-        <% } else { %>
-        <a class="nav-link" href="/listings/new">Airbnb your home</a>
-        <a class="nav-link fw-bold" href="/profile"><%= currUser.username %></a>
-        <a href="/bookings" class="nav-link">
-          <i class="fa-solid fa-suitcase-rolling"></i> My Trips
-        </a>
-        <a class="nav-link" href="/logout">Log out</a>
-        <% } %>
-      </div>
-
-      <!-- HAMBURGER -->
-      <div class="hamburger" id="menuToggle">
-        <i class="fa-solid fa-bars"></i>
-      </div>
-    </div>
-  </div>
-
-  <!-- MOBILE DROPDOWN -->
-  <div class="mobile-menu" id="mobileMenu">
-    <% if (!currUser) { %>
-    <button class="openLogin border-0 bg-transparent">Log in</button>
-    <button class="openSignup border-0 bg-transparent">Sign up</button>
-    <% } else { %>
-    <a href="/listings/new">Airbnb your home</a>
-    <a href="/bookings"
-      ><i class="fa-solid fa-suitcase-rolling"></i> My Trips</a
-    >
-    <a href="/profile"><%= currUser.username %></a>
-    <a href="/logout">Log out</a>
-    <% } %>
-  </div>
-</nav>
-
-<!-- LOGIN MODAL -->
-<div id="loginModal" class="modal">
-  <div class="modal-content">
-    <span class="close-modal" id="closeLogin">&times;</span>
-    <h3>Welcome Back</h3>
-    <form action="/login" method="POST">
-      <input type="text" name="username" placeholder="Username" required />
-      <input type="password" name="password" placeholder="Password" required />
-      <button type="submit">Log In</button>
-    </form>
-    <p style="text-align:center; margin-top: 10px; font-size:0.9rem;">
-      Don't have an account?
-      <span style="color:#ff385c; cursor:pointer;" id="openSignupFromLogin">Sign up</span>
-    </p>
-  </div>
-</div>
-
-<!-- SIGNUP MODAL -->
-<div id="signupModal" class="modal">
-  <div class="modal-content">
-    <span class="close-modal" id="closeSignup">&times;</span>
-    <h3>Create Your Account</h3>
-    <form action="/signup" method="POST">
-      <input type="text" name="username" placeholder="Username" required />
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="password" name="password" placeholder="Password" required />
-      <button type="submit">Sign Up</button>
-    </form>
-    <p style="text-align:center; margin-top: 10px; font-size:0.9rem;">
-      Already have an account?
-      <span style="color:#ff385c; cursor:pointer;" id="openLoginFromSignup">Sign in</span>
-    </p>
-  </div>
-</div>
 
 <style>
   /* ================= MODAL ================= */
@@ -355,6 +251,122 @@
     background-color: #e0294d;
   }
 </style>
+
+<nav class="navbar sticky-top">
+  <div class="container-fluid">
+    <!-- LEFT -->
+    <div class="nav-left">
+      <a class="navbar-brand" href="/listings">
+        <i class="fa-regular fa-compass"></i>
+      </a>
+
+      <!-- Hidden on mobile -->
+      <a class="nav-link" href="/listings">Explore</a>
+    </div>
+
+    <!-- CENTER -->
+    <div class="nav-center">
+      <div class="category-menu">
+        <a href="/listings/category/Homes" class="category-item">
+          <img src="https://cdn-icons-png.flaticon.com/512/69/69524.png" />
+          <span>Homes</span>
+        </a>
+
+        <a href="/listings/category/Villas" class="category-item">
+          <img src="https://cdn-icons-png.flaticon.com/512/619/619153.png" />
+          <span>Villas</span>
+        </a>
+
+        <a href="/listings/category/Resorts" class="category-item">
+          <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" />
+          <span>Resorts</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="nav-right">
+      <!-- DESKTOP MENU -->
+      <div class="desktop-menu">
+        <% if (!currUser) { %>
+        <!-- <button class="border-0 bg-transparent">Log in</button>
+        <button class="border-0 bg-transparent">Sign up</button> -->
+        <button class="openLogin border-0 bg-transparent">Log in</button>
+        <button class="openSignup border-0 bg-transparent">Sign up</button>
+        <% } else { %>
+        <!-- <a class="nav-link" href="/listings/new">Airbnb your home</a> -->
+        <a href="/bookings" class="nav-link">
+          <i class="fa-solid fa-suitcase-rolling icon"></i> My Trips
+        </a>
+        <a class="nav-link fw-bold " href="/profile">
+          <i class="fa-solid fa-circle-user icon"></i>
+          Profile
+        </a>
+        <a class="nav-link" href="/logout">
+          <i class="fa-solid fa-right-from-bracket icon"></i>
+          Log out
+        </a>
+        <% } %>
+      </div>
+
+      <!-- HAMBURGER -->
+      <div class="hamburger" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE DROPDOWN -->
+  <div class="mobile-menu" id="mobileMenu">
+    <% if (!currUser) { %>
+    <button class="openLogin border-0 bg-transparent">Log in</button>
+    <button class="openSignup border-0 bg-transparent">Sign up</button>
+    <% } else { %>
+    <a href="/listings/new"><i class="fa-solid fa-house-chimney icon"></i>Airbnb your home</a>
+    <a href="/bookings"
+      ><i class="fa-solid fa-suitcase-rolling icon"></i> My Trips</a
+    >
+    <a href="/profile"><i class="fa-solid fa-circle-user icon"></i>Profile</a>
+    <a href="/logout"><i class="fa-solid fa-right-from-bracket icon"></i>Log out</a>
+    <% } %>
+  </div>
+</nav>
+
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" id="closeLogin">&times;</span>
+    <h3>Welcome Back</h3>
+    <form action="/login" method="POST">
+      <input type="text" name="username" placeholder="Username" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <button type="submit">Log In</button>
+    </form>
+    <p style="text-align:center; margin-top: 10px; font-size:0.9rem;">
+      Don't have an account?
+      <span style="color:#ff385c; cursor:pointer;" id="openSignupFromLogin">Sign up</span>
+    </p>
+  </div>
+</div>
+
+<!-- SIGNUP MODAL -->
+<div id="signupModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" id="closeSignup">&times;</span>
+    <h3>Create Your Account</h3>
+    <form action="/signup" method="POST">
+      <input type="text" name="username" placeholder="Username" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+    <p style="text-align:center; margin-top: 10px; font-size:0.9rem;">
+      Already have an account?
+      <span style="color:#ff385c; cursor:pointer;" id="openLoginFromSignup">Sign in</span>
+    </p>
+  </div>
+</div>
+
 
 <script>
   // ================= MODAL SCRIPT =================
